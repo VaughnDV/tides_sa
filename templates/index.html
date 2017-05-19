@@ -1,0 +1,111 @@
+{% extends "layout.html" %}
+
+{% block body %}
+
+<div class="jumbotron" style="background:#28475C; background-image: url({{ url_for('static', filename='profilebg2') }}); background-size: 100% 100%;">
+    <h1 class="animated slideInLeft" style="font-family: 'Satisfy', cursive; color: orange;">Vaughn de Villiers</h1>
+    <p class="lead animated bounceInRight"  style="color: #86CBCC;">Web developer</p>
+    <p><a href=#contact class="btn btn-warning btn-large animated rollIn">Contact &raquo;</a></p>
+</div>
+
+<!-- About Section -->
+    <section class="success" id="about">
+        <div class="container">
+
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                <br><br>
+
+                    <h2 style="font-family: 'Lobster', cursive;">About</h2>
+                    <br>
+                    <p style="font-family: 'Open Sans', sans-serif;">My name is Vaughn de Villiers, I am a freelance web developer based in the Hibuscus area, I specialize in building web apps. I work with my clients to design, build and launch their ideas and innovations into life.</p>
+                    <br>
+                    <h2 style="font-family: 'Lobster', cursive;">What are web apps?</h2>
+                    <br>
+                    <p style="font-family: 'Open Sans', sans-serif;">Web apps are websites that have extra functionality. Web apps can help you manage your business, draw in more customers, solve problems, boost productivity, reduce costs etc... The sky is the limit!!!<br><br>
+                    Here is a few ideas:</p>
+                    <ul style="font-family: 'Open Sans', sans-serif;">
+                      <li>Develop and sponsor a local tides and weather website.</li>
+                      <li>Online reservation service for a restaurant.</li>
+                      <li>Collection bookings for a laundromat during holiday season.</li>
+                      <li>Automatically generate and email quotations and/or PDFs.</li>
+                      <li>Online database so that you can work from anywhere.</li>
+                      <li>Blogs to suppliment your website and share your knowledge.</li>
+                    </ul>
+                    <br>
+                    <h2 style="font-family: 'Lobster', cursive;">Technologies I work with:</h2>
+                    <br>
+                    <p style="font-family: 'Open Sans', sans-serif;">Python, Flask, Django, HTML5, CSS3, Javascript, Jquery, MySQL, Postgres, MongoDB, Git, Ubuntu, RESTful APIs, API services, bootstrap.</p>
+                    <br>
+                    <h2 style="font-family: 'Lobster', cursive;">Guarantee:</h2>
+                    <br>
+                    <p style="font-family: 'Open Sans', sans-serif;">100% money back gaurentee on the quality of my work.</p>
+                    
+
+
+
+            </div>
+        </div>
+    </section>
+
+<!-- Contact Section -->
+    <section id="contact">
+            <div class="container">
+            <div class="row">
+            <hr><br>
+                <div class="col-lg-12 text-center">
+                    <h2 style="font-family: 'Lobster', cursive;">Contact me.</h2>
+                </div>
+        
+            <div class="row">
+
+            </div>
+                <div class="container contact">
+                <div class="row contact-fields">
+                    <div class="col-md-6 col-md-offset-3">
+            {% if success %}
+              <div class="alert alert-success">Your message has been sent.</div>
+            {% else %}
+
+                {% for message in form.email.errors %}
+                  <div class="flash alert alert-danger">{{ message }}</div>
+                {% endfor %}
+                 
+                {% for message in form.message.errors %}
+                  <div class="flash alert alert-danger">{{ message }}</div>
+                {% endfor %}
+        <form action="{{ url_for('home') }}" method="post" name="contact" role="form">
+                {{form.hidden_tag()}}
+                <div class="from-group">
+                {{ form.email(class_="form-control", placeholder="Email", **{'data-validation':'email'}) }}
+                </div>
+                <br />
+                <div class="form-group">
+                {{ form.message(class_="form-control", placeholder="Message", **{'data-validation':'required'}) }}
+                </div>
+                <div class="form-inline row">
+                    <div class="form-group col-sm-6 col-sm-offset-6">
+                {{ form.submit(class="btn btn-default btn-block") }}
+                    </div>
+                </div>
+        </form>
+        {% endif %}
+        <br><br>
+        <address>
+            Leisure Bay<br /> Kwa-Zulu Natal<br />
+            South Africa<br /> 4278<br /><br />
+            <strong>Phone:</strong>
+            +27(0)39 319 1088 
+        </address>
+
+        <address>
+
+            <strong>Email:</strong> <a href="mailto:vaughndevilliers@gmail.com">vaughndevilliers@gmail.com</a> 
+        </address>
+                </div><!-- ./col-md-6 -->
+                </div><!-- ./ row -->
+        
+        </div><!-- ./ contact -->
+        </div>
+    </section>
+{% endblock %}

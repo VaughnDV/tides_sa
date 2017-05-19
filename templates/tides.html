@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>{{title}}</title>
+  <meta name="Description" content="{{title}} for easy tidal times and weather information in margate, ramsgate, port sheptone port edward on the south coast, kzn natal, durban tides, richards bay tides, east london tides, port elizabeth tides, cape town, hermanus, western cape, eastern cape, port st johns " />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="Keywords" content="tide, tidal, coast, western cape, beach, weather, natal, south coast, port shepstone, margate, hibuscus,  South Africa">
+  <meta name="author" content="Vaughn de Villiers">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+  <!-- Optional theme -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Oleo+Script" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Satisfy" rel="stylesheet">
+
+
+  <!-- Local CSS -->
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}" />
+</head>
+
+<body style="background: #5496FF">
+<div id="fullpage">
+
+  <div class="section">
+
+  <div class="row row-centered">
+    <div class="col-sm-4 col-centered">  
+    <h1 class="text-center" style="font-family: 'Oleo Script', cursive; color: orange">{{title}}</h1>
+    </div>
+  </div>
+        <div class="row">
+        <div class="col-md-4" style="font-family: 'Ubuntu', sans-serif;">   
+
+            <h4>{{ date.strftime('%Y-%m-%d') }}</h4>
+            <h2 style="font-family: 'Oleo Script', cursive; ">{{ area }} Tides</h2> 
+            
+         <table class="table table-sm" style="width: auto;" align="center">
+            {% for tide in tides %}
+               {% for key, value in tide.items() %}
+               <tbody>
+               <tr>
+                  <td>{{ key }} tide</td>
+                   <td>{{ value }}</td>
+                </tr>
+                </tbody>
+               {% endfor %}
+            {% endfor %}
+        </table>   
+        </div>
+        <div class="col-md-4">
+            <h2 style="font-family: 'Oleo Script', cursive;">Today's Weather<img src="{{ icon_url2 }}"> </h2> 
+            <h4>{{ today }}</h4>
+        </div>
+        <div class="col-md-4">
+            <h2 style="font-family: 'Oleo Script', cursive;">Tomorrow's Weather <img src="{{ icon_url3 }}"> </h2>    
+            <h4>{{ tomorrow }}</h4>
+        </div>
+      </div>
+          <h6>Switch</h6>
+          <div id="switch">
+          <div id="circle"></div>
+      </div>
+
+<footer>
+  <div class="col-sm-offset-4 col-sm-4">
+    <p>Website created by:</p>
+    <h3 style="font-family: 'Satisfy', cursive;"><a href="{{ url_for('home') }}">Vaughn de Villiers</a></h3>
+    <h4 style="font-family: 'Satisfy', cursive;">Web Developer</h4>
+    <h2>Disclaimer</h2>
+    <p class="text-centre">{{copyright}}</p>
+    <p><br><br><br><br><br><br><br><br></p>
+  </div>
+    <div class="col-sm-offset-4 col-sm-4">
+    <p>Website created by:</p>
+  </div>
+  <div class="col-sm-offset-4 col-sm-4 fix">
+    <a href="http://www.reportprowlers.co.za"><img src="{{ url_for('static', filename='reportprowlersbanner') }}" class="img-fluid" style="width:100%; overflow:hidden;" alt="Responsive image"/></a>
+   </div>
+</footer>
+
+       </div>
+  </div>
+</div>
+
+
+<script src="/static/scripts/jquery-1.10.2.js"></script>
+<!-- <script src="/static/scripts/bootstrap.js"></script> -->
+</body>
+
+
+<script type="text/javascript">
+
+$("#switch").click(function () {
+    if ($("#fullpage").hasClass("night")) {
+        $("#fullpage").removeClass("night");
+        $("#switch").removeClass("switched");
+    }
+    else {
+        $("#fullpage").addClass("night");
+        $("#switch").addClass("switched");
+
+    }
+});
+$('#check').click(function() {
+    $("#emailShow").toggle(this.checked);
+});
+</script>
+
+<script>
+
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-85017051-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+</html>

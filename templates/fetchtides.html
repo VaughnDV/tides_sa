@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>{{title}}</title>
+  <meta name="Description" content="{{title}} for easy High and Low tide times and weather information on the South African coast, KwaZulu-Natal, Eastern cape and the  Western cape" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="Keywords" content="tide, tidal, coast, western cape, beach, weather, natal, south coast, port shepstone, margate, hibuscus, South Africa, high tide, low tide, eastern cape, beach weather, durban tides, eastlondon tides, capetown tides, cape tides">
+  <meta name="author" content="Vaughn de Villiers">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+
+    <meta property="og:url"                content="'http://www.easytides.co.za/" />
+    <meta property="og:type"               content="website" />
+    <meta property="og:title"              content="Easy Tides" />
+    <meta property="og:description"        content="For quick and easy High and Low tide times and weather information on the South African coast, KwaZulu-Natal, Eastern cape and the  Western cape"/>
+    <meta property="og:image"              content="http://www.easytides.co.za/static/fb_easytides.png" />
+  
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+  <!-- Optional theme -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Oleo+Script" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Satisfy" rel="stylesheet">
+
+
+  <!-- Local CSS -->
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}" />
+
+
+
+</head>
+
+
+
+
+<body>
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '325507724488939',
+      xfbml      : true,
+      version    : 'v2.8'
+    });
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+</script>
+<div id="fullpage">
+
+  <div class="section">
+
+  <div class="row row-centered">
+
+    <h1 class="text-center" style="font-family: 'Oleo Script', cursive; color: orange;">{{title}}<br><div 
+                class="fb-like"  data-layout="button" 
+                data-share="true" data-show-faces="true"></div></h1>
+
+
+    <br>
+    <button type="button" id="kznbtn" name="kznbtn" class="btn btn-warning btn-lg">KwaZulu-Natal</button>
+    <button type="button" id="wcbtn" name="wcbtn" class="btn btn-warning btn-lg">Western Cape</button>
+    <button type="button" id="ecbtn" name="ecbtn" class="btn btn-warning btn-lg">Eastern Cape</button>
+    <h6>Switch</h6>
+    <div id="switch">
+    <div id="circle"></div>
+    </div>
+  <form class="form-horizontal" method="POST"  id="kzn" style="display:none">
+  
+  <div class="form-group">
+    <label class="control-label col-sm-4" for="area">Select area:</label>
+        <div class="col-sm-4">
+            <br>
+          <select class="form-control" name="area" placeholder="Optional">
+            <option>Durban Central</option>
+            <option>Umhlanga</option>            
+            <option>Amazimtoti</option>
+            <option>Margate</option>
+            <option>Port Edward</option>
+            <option>Port Shepstone</option>
+            <option>Richards Bay</option>
+            <option>Ballito</option>
+            <option>Kingsburgh</option>
+            <option>Scottsburgh</option>
+            <option>St Lucia</option>
+          </select>
+        </div>
+      </div>
+  <div class="form-group">
+    <div class="col-sm-offset-4 col-sm-4">
+      <div class="checkbox" style="display:none">
+        <label><input type="checkbox" id="check" name="check" value="checked" >Subscribe to sponsor's emails</label>
+      </div>
+    </div>
+  </div>
+  <div class="form-group" id="emailShow" style="display:none">
+    <label class="control-label col-sm-4" for="email">Email:</label>
+    <div class="col-sm-4">
+      <input type="email" class="form-control" name="email" placeholder="Optional">
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-offset-4 col-sm-4">
+      <button type="submit" class="btn btn-warning" value="Submit">Get tides</button>
+    </div>
+</div>
+</form>
+
+
+<form class="form-horizontal" method="POST"  id="ec" style="display:none">
+  <div class="form-group">
+    <label class="control-label col-sm-4" for="area">Select area:</label>
+        <div class="col-sm-4">
+                    <br>
+          <select class="form-control" name="area" placeholder="Optional">
+            <option>Port Elizabeth</option>
+            <option>East London</option>
+            <option>Port St Johns</option>   
+            <option>Port Alfred</option> 
+            <option>Jefferys Bay</option>
+          </select>
+        </div>
+      </div>
+
+  <div class="form-group">
+    <div class="col-sm-offset-4 col-sm-4">
+      <div class="checkbox" style="display:none">
+        <label><input type="checkbox" id="check" name="check" value="checked" >Subscribe to sponsor's emails</label>
+      </div>
+    </div>
+  </div>
+  <div class="form-group" id="emailShow" style="display:none">
+    <label class="control-label col-sm-4" for="email">Email:</label>
+    <div class="col-sm-4">
+      <input type="email" class="form-control" name="email" placeholder="Optional">
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-offset-4 col-sm-4">
+      <button type="submit" class="btn btn-warning" value="Submit">Get tides</button>
+
+    </div>
+
+</div>
+</form>
+
+
+
+<form class="form-horizontal" method="POST" id="wc" style="display:none">
+  
+  <div class="form-group">
+    <label class="control-label col-sm-4" for="area">Select area:</label>
+        <div class="col-sm-4">
+                    <br>
+          <select class="form-control" name="area" placeholder="Optional">
+            <option>Camps Bay</option>
+            <option>Hout Bay</option>
+            <option>Green Point</option>
+            <option>Hermanus</option>
+            <option>Mossel Bay</option>
+            <option>George</option>
+            <option>Plettenberg Bay</option>
+            <option>Simons Town</option>
+          </select>
+        </div>
+      </div>
+
+  <div class="form-group">
+    <div class="col-sm-offset-4 col-sm-4">
+      <div class="checkbox" style="display:none">
+        <label><input type="checkbox" id="check" name="check" value="checked" >Subscribe to sponsor's emails</label>
+      </div>
+    </div>
+  </div>
+  <div class="form-group" id="emailShow" style="display:none">
+    <label class="control-label col-sm-4" for="email">Email:</label>
+    <div class="col-sm-4">
+      <input type="email" class="form-control" name="email" placeholder="Optional">
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-offset-4 col-sm-4">
+      <button type="submit" class="btn btn-warning" value="Submit">Get tides</button>
+    </div>
+
+</div>
+</form>
+
+                              <br>
+                      <div class="time-circle">
+                              <div class="sun"></div>
+                              <div class="moon">
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                              </div>
+                              <div class="stars">
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                                    <div></div>
+                              </div>
+                              <div class="water"></div>
+                        </div>
+
+<div id="intro-text">
+<div class="col-sm-offset-4 col-sm-4">
+    <br>
+    <br>
+    <p>Website created by:</p>
+    <h3 style="font-family: 'Satisfy', cursive;"><a href="{{ url_for('home') }}">Vaughn de Villiers</a></h3>
+    <h4 style="font-family: 'Satisfy', cursive;">Web Developer</h4>
+
+</div>
+
+</div>
+        
+    <div class="col-sm-offset-4 col-sm-4 fix">
+    <p>Sponsored by: </p>
+    <a href="http://www.reportprowlers.co.za"><img src="{{ url_for('static', filename='reportprowlersbanner') }}" class="img-fluid" style="width:100%; overflow:hidden;" alt="Responsive image"/></a>
+    </div>
+
+</div>
+
+</div>
+
+    <script src="/static/scripts/jquery-1.10.2.js"></script>
+    <!-- <script src="/static/scripts/bootstrap.js"></script> -->
+</body>
+
+<script type="text/javascript">
+
+   $(document).ready(function() {
+
+  $('form').on('submit', function(event) {
+    console.log("data")
+    if(document.getElementById('check').checked) {
+      $.ajax({
+        data : {
+          email : $('#email').val(),
+          area : $('#area').val()
+        },
+        type : 'POST',
+        url : '/process'
+      });
+    }
+    else {
+        $.ajax({
+          data : {
+            area : $('#area').val()
+          },
+          type : 'POST',
+          url : '/process'
+        });
+  }
+
+
+    });
+
+    event.preventDefault();
+
+  });
+
+
+</script>
+
+
+<script type="text/javascript">
+
+$("#switch").click(function () {
+    if ($("#fullpage").hasClass("night")) {
+        $("#fullpage").removeClass("night");
+        $("#switch").removeClass("switched");
+    }
+    else {
+        $("#fullpage").addClass("night");
+        $("#switch").addClass("switched");
+
+    }
+});
+
+$('#check').click(function() {
+    $("#emailShow").toggle(this.checked);
+});
+
+$('#kznbtn').on('click', function() {
+  $('#kzn').show(300);
+  $('#ec').hide(300);
+  $('#wc').hide(300)
+});
+
+$('#wcbtn').on('click', function() {
+  $('#wc').show(300);
+  $('#ec').hide(300);
+  $('#kzn').hide(300)
+});
+
+$('#ecbtn').on('click', function() {
+  $('#ec').show(300);
+  $('#kzn').hide(300);
+  $('#wc').hide(300)
+});
+
+</script>
+
+<script>
+
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-85017051-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+</html>
